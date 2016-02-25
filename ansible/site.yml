@@ -4,8 +4,7 @@
     drush_version: master
   roles:
     - geerlingguy.mysql
-    - getvalkyrie.aegir
-    - getvalkyrie.skynet
+    - geerlingguy.drush
   tasks:
     - apt:
         name: "{{ item }}"

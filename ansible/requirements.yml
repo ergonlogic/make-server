@@ -1,9 +1,6 @@
-- name: getvalkyrie.aegir
-  src: https://github.com/getvalkyrie/ansible-role-aegir
-  version: master
 - name: geerlingguy.mysql
   src: https://github.com/geerlingguy/ansible-role-mysql
   version: master
-- name: getvalkyrie.skynet
-  src: https://github.com/getvalkyrie/ansible-role-skynet
+- name: geerlingguy.drush
+  src: https://github.com/geerlingguy/ansible-role-drush
   version: master
