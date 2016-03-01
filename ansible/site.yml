@@ -14,3 +14,11 @@
         - htop
         - strace
         - tree
+        - subversion
+        - unzip
+        - bzr
+        - php5-mysql
+    - lineinfile:
+        dest: /home/vagrant/.bashrc
+        line: "export UNISH_DB_URL='mysql://root:root@127.0.0.1'"
+ 
