@@ -1,0 +1,28 @@
+---
+- hosts: localhost
+  roles:
+    - geerlingguy.mysql
+  tasks:
+    - name: Install some utilities
+      apt:
+        name: "{{ item }}"
+        state: installed
+      with_items:
+        - screen
+        - htop
+        - strace
+        - tree
+        - subversion
+        - unzip
+        - bzr
+        - php5-mysql
+        - php5-cli
+    - name: Make DB accessible
+      lineinfile:
+        dest: /home/vagrant/.bashrc
+        line: "export UNISH_DB_URL='mysql://root:root@127.0.0.1'"
+    - name: Download Drush
+      get_url:
+        url: http://files.drush.org/drush.phar
+        dest: /usr/bin/drush
+        mode: 0555
