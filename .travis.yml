@@ -1,7 +1,7 @@
 ---
 language: php
 
-sudo: false
+sudo: true
 
 env:
   matrix:
@@ -9,4 +9,4 @@ env:
     - DRUSH_DEV=false
 
 script:
-  - time ansible/bootstrap.sh
+  - sudo ansible/bootstrap.sh
