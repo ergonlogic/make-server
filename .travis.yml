@@ -1,7 +1,9 @@
 ---
 language: php
 
-sudo: true
+dist: trusty
+
+sudo: required
 
 env:
   matrix:
