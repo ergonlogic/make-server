@@ -1,0 +1,12 @@
+---
+language: php
+
+sudo: false
+
+env:
+  matrix:
+    - DRUSH_DEV=true
+    - DRUSH_DEV=false
+
+script:
+  - time ansible/bootstrap.sh
