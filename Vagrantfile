@@ -13,8 +13,7 @@ Vagrant.configure(2) do |config|
 
     d.vm.provision "shell",
       path: "ansible/bootstrap.sh",
-      args: ENV['DRUSH_DEV'] || "false",
+      env: { :DRUSH_DEV => ENV['DRUSH_DEV'] || "false", :VAGRANT => "true" },
       keep_color: true
-
   end
 end
