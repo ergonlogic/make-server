@@ -20,11 +20,8 @@
         - mysql-server
     - name: Make DB accessible
       lineinfile:
-        dest: "{{ item }}"
+        dest: /home/vagrant/.bashrc
         line: "export UNISH_DB_URL='mysql://root:root@127.0.0.1'"
-        with_items:
-           - /home/vagrant/.bashrc
-           - /root/.bashrc
     - name: Download Drush
       get_url:
         url: http://files.drush.org/drush.phar
