@@ -15,10 +15,10 @@ if [[ $DRUSH_DEV == 'true' ]]; then
   ansible-playbook $ANSIBLE_DIR/drush_dev.yml -i $ANSIBLE_DIR/inventory
 else
   echo "Installing Ansible"
-  apt-get -y install software-properties-common > /dev/null
-  apt-add-repository ppa:ansible/ansible &> /dev/null
-  apt-get update > /dev/null
-  apt-get -y install ansible > /dev/null
+  apt-get -y install software-properties-common
+  apt-add-repository ppa:ansible/ansible
+  apt-get update
+  apt-get -y install -o Dpkg::Options::="--force-confnew" ansible
   ansible-galaxy install geerlingguy.mysql -p $ANSIBLE_DIR/roles/ --ignore-errors
   ansible-playbook $ANSIBLE_DIR/drush.yml -i $ANSIBLE_DIR/inventory
 fi
