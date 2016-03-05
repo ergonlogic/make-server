@@ -1,14 +1,5 @@
 ---
 - hosts: localhost
-  pre_tasks:
-    - name: Avoid TravisCI failure
-      copy:
-        dest: /root/.my.cnf
-        content: "[client]
-username=root
-password=root"
-  roles:
-    - geerlingguy.mysql
   tasks:
     - name: Install some utilities
       apt:
@@ -26,6 +17,7 @@ password=root"
         - php5-cli
         - php5
         - php5-gd
+        - mysql-server
     - name: Make DB accessible
       lineinfile:
         dest: "{{ item }}"
