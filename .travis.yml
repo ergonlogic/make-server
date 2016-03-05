@@ -13,7 +13,6 @@ before_install:
   - sudo apt-get -y autoremove
   - sudo apt-get autoclean
   - sudo rm -rf /var/lib/mysql
-  - sudo truncate -s 0 /var/log/mysql/error.log
 
 env:
   matrix:
