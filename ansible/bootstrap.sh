@@ -15,10 +15,10 @@ if [[ $DRUSH_DEV == 'true' ]]; then
   ansible-playbook $ANSIBLE_DIR/drush_dev.yml -i $ANSIBLE_DIR/inventory
 else
   echo "Installing Ansible"
-  apt-get -y install software-properties-common
-  apt-add-repository -y ppa:ansible/ansible-1.9
-  apt-get update -qq
-  apt-get -y install -o Dpkg::Options::="--force-confnew" ansible
+  apt-get -y install software-properties-common > /dev/null
+  apt-add-repository -y ppa:ansible/ansible-1.9 &> /dev/null
+  apt-get update -qq > /dev/null
+  apt-get -y install -o Dpkg::Options::="--force-confnew" ansible > /dev/null
   ansible-playbook $ANSIBLE_DIR/drush.yml -i $ANSIBLE_DIR/inventory
 fi
 
