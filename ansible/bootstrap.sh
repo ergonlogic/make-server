@@ -19,7 +19,6 @@ else
   apt-add-repository -y ppa:ansible/ansible-1.9
   apt-get update -qq
   apt-get -y install -o Dpkg::Options::="--force-confnew" ansible
-  ansible-galaxy install geerlingguy.mysql -p $ANSIBLE_DIR/roles/ --ignore-errors
   ansible-playbook $ANSIBLE_DIR/drush.yml -i $ANSIBLE_DIR/inventory
 fi
 

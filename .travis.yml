@@ -5,15 +5,6 @@ dist: trusty
 
 sudo: true
 
-before_install:
-  - sudo apt-get update -qq
-
-  # Remove MySQL. Completely and totally.
-  - sudo apt-get -y remove --purge 'mysql*'
-  - sudo apt-get -y autoremove
-  - sudo apt-get autoclean
-  - sudo rm -rf /var/lib/mysql
-
 env:
   matrix:
     - DRUSH_DEV=true
