@@ -1,7 +1,7 @@
-DRUSH VM [![Build status](https://travis-ci.org/ergonlogic/drush-vm.svg)](https://travis-ci.org/ergonlogic/drush-vm)
-========
+DRUPAL8 VM [![Build status](https://travis-ci.org/ergonlogic/d8-vm.svg)](https://travis-ci.org/ergonlogic/d8-vm)
+==========
 
-Simple Vagrant-based VM that installs Drush.
+Simple Vagrant-based VM that installs Drush and a Drupal site.
 
     $ git clone https://github.com/ergonlogic/drush-vm.git
     $ cd drush-vm

@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  vars:
+    - d8_dir: /var/www/d8
+  tasks:
+    - name: Download Drupal 8
+      shell: drush -y dl drupal --destination="{{ d8_dir }}"/.. --drupal-project-rename=d8
+      args:
+        creates: "{{ d8_dir }}"
+    - name: Install Drupal site
+      shell: "drush -y si minimal --db-url=mysql://root@localhost/site2"
+      args:
+        chdir: "{{ d8_dir }}"
+        #creates: settings.php
+    #- name: 
+
