@@ -16,7 +16,7 @@ if [[ $DRUSH_DEV == 'true' ]]; then
 else
   echo "Installing Ansible"
   apt-get -y install software-properties-common
-  apt-add-repository -y ppa:ansible/ansible
+  apt-add-repository -y ppa:ansible/ansible-1.9
   apt-get update
   apt-get -y install -o Dpkg::Options::="--force-confnew" ansible
   ansible-galaxy install geerlingguy.mysql -p $ANSIBLE_DIR/roles/ --ignore-errors
