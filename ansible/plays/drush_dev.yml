@@ -18,7 +18,6 @@
         - subversion
         - unzip
         - bzr
-        - php5-mysql
     - name: Make DB accessible
       lineinfile:
         dest: /home/vagrant/.bashrc

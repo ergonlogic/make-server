@@ -1,0 +1,35 @@
+---
+- hosts: localhost
+  vars:
+    - drupal_dir: /var/www/html/d8
+    - profile: make_server
+    - repo_path: "{{ root }}"
+    - site_name: site0
+    - site_dir: "{{ drupal_dir }}/sites/{{ site_name }}"
+    - makefile: dev.build.yml
+  tasks:
+    - name: Build platform
+      shell: "drush make -y {{ root }}/{{ makefile }} {{ drupal_dir }}"
+      args:
+        creates: "{{ drupal_dir }}"
+    - name: Symlink project root into platform as a profile
+      file:
+        state: link
+        path: "{{ drupal_dir }}/profiles/{{ profile }}"
+        # N.B. 'root' is passed in bootstrap.sh, since it'll differ b/w Vagrant
+        # and TravisCI.
+        src: "{{ root }}"
+    - name: Install Drupal site
+      shell: "drush -y si {{ profile }} --db-url=mysql://root@localhost/{{ site_name }} --sites-subdir={{ site_name }}"
+      args:
+        chdir: "{{ drupal_dir }}"
+        creates: "{{ site_dir }}/settings.php"
+    - name: Make site files/ dir writeable by web user
+      file:
+        path: "{{ site_dir }}/files/"
+        owner: www-data
+        recurse: yes
+    - name: Set default password to `pwd`
+      shell: "drush upwd admin --password=pwd"
+      args:
+        chdir: "{{ site_dir }}"
