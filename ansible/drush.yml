@@ -18,10 +18,6 @@
         - php5
         - php5-gd
         - mysql-server
-    - name: Make DB accessible
-      lineinfile:
-        dest: /home/vagrant/.bashrc
-        line: "export UNISH_DB_URL='mysql://root:root@127.0.0.1'"
     - name: Download Drush
       get_url:
         url: http://files.drush.org/drush.phar

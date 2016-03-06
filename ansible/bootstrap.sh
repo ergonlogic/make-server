@@ -19,7 +19,9 @@ else
   apt-add-repository -y ppa:ansible/ansible-1.9 &> /dev/null
   apt-get update -qq > /dev/null
   apt-get -y install -o Dpkg::Options::="--force-confnew" ansible > /dev/null
+  echo "Installing Drush"
   ansible-playbook $ANSIBLE_DIR/drush.yml -i $ANSIBLE_DIR/inventory
+  echo "Installing Drupal"
   ansible-playbook $ANSIBLE_DIR/d8.yml -i $ANSIBLE_DIR/inventory
 fi
 

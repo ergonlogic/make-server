@@ -1,0 +1,13 @@
+name: Make Server
+type: profile
+description: 'Build a site to serve package and release data suitable for Drush Make.'
+version: 0.0.x
+core: 8.x
+dependencies:
+  - node
+  - block
+  - dblog
+  - page_cache
+  - dynamic_page_cache
+themes:
+  - stark
