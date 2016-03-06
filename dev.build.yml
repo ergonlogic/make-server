@@ -4,3 +4,6 @@ api: 2
 
 projects:
   drupal: { version: ~ }
+  features: { version: ~ }
+  config_update: { version: ~ }
+
