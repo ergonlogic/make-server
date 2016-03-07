@@ -6,6 +6,8 @@
         name: "{{ item }}"
         state: installed
       with_items:
+        - apache2
+        - libapache2-mod-php5
         - php5-curl
         - openjdk-7-jre-headless
     - name: Download Selenium
@@ -41,3 +43,7 @@
   handlers:
     - name: Clear Drush cache
       shell: drush cc drush
+    - name: Restart Apache
+      service:
+        name: apache2
+        state: restarted
