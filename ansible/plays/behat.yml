@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Install Behat dependencies
+      apt:
+        name: "{{ item }}"
+        state: installed
+      with_items:
+        - php5-curl
+        - openjdk-7-jre-headless
+    - name: Download Selenium
+      get_url:
+        url: http://selenium-release.storage.googleapis.com/2.52/selenium-server-standalone-2.52.0.jar
+        dest: "{{ root }}/selenium-server.jar"
+        mode: 0555
+      when: vagrant == 'true'
+    - name: Install Composer
+      shell: "curl -s https://getcomposer.org/installer | php"
+      args:
+        chdir: "{{ root }}"
+      when: vagrant == 'true'
+    - name: Install Behat
+      shell: "./composer.phar install"
+      args:
+        chdir: "{{ root }}"

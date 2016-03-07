@@ -1,3 +1,6 @@
 .vagrant/*
 ansible/roles/*
 *.swp
+vendor/*
+bin/*
+selenium-server.jar
