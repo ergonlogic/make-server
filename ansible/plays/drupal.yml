@@ -4,7 +4,7 @@
     - drupal_dir: /var/www/html/d8
     - profile: make_server
     - repo_path: "{{ root }}"
-    - site_name: site0
+    - site_name: default
     - site_dir: "{{ drupal_dir }}/sites/{{ site_name }}"
     - makefile: dev.build.yml
     # N.B. 'root' is passed in bootstrap.sh, since it'll differ b/w Vagrant
