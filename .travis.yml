@@ -12,9 +12,11 @@ env:
 
 before_script:
   - sudo -E ansible/bootstrap.sh
+  # Debugging
   - cat behat_params.sh
-  - sleep 3  # Give web server a chance to start
-  - echo "127.0.0.1 localhost" | sudo tee -a /etc/hosts
+  - ping -c3 localhost  # Give web server a chance to start
+  - apache2ctl -S
+  - apache2ctl status
   - curl http://localhost:8888
 
 script:
