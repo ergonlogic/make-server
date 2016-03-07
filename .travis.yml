@@ -12,6 +12,7 @@ env:
 
 before_script:
   - sudo -E ansible/bootstrap.sh
+  - cat behat_params.sh
 
 script:
   - make test-on-travis
