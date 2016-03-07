@@ -19,19 +19,11 @@
       args:
         chdir: "{{ root }}"
         creates: "{{ root }}/composer.phar"
-      when: vagrant == 'true'
-    - name: Install Behat (Vagrant)
-      shell: "./composer.phar install"
+    - name: Install Behat
+      shell: "{{ root }}/composer.phar install"
       args:
         chdir: "{{ root }}"
         creates: "{{ root }}/bin/behat"
-      when: vagrant == 'true'
-    - name: Install Behat (TravisCI)
-      shell: "composer install"
-      args:
-        chdir: "{{ root }}"
-        creates: "{{ root }}/bin/behat"
-      when: vagrant == 'false'
     - name: Install drush-bde-env
       git:
         repo: https://github.com/pfrenssen/drush-bde-env.git
