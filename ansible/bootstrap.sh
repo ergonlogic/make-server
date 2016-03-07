@@ -9,7 +9,7 @@ if [[ $2 == 'true' ]]; then
   ROOT=/vagrant
 else
   ANSIBLE_DIR=./ansible
-  ROOT=../..
+  ROOT=$TRAVIS_BUILD_DIR
 fi
 
 # Default to packaged versions of Ansible and Drush, but allow installation
