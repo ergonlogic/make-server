@@ -1,4 +1,4 @@
-MAKE SERVER [![Build status](https://travis-ci.org/ergonlogic/mak-server.svg)](https://travis-ci.org/ergonlogic/make-server)
+MAKE SERVER [![Build status](https://travis-ci.org/ergonlogic/make-server.svg)](https://travis-ci.org/ergonlogic/make-server)
 ===========
 
 Drush Make is certainly quite useful for building Drupal code-bases. A little-known capability is to load project version data from a source other than the official http://updates.drupal.org. This install profile is intended to make it easy to run your own updates service.

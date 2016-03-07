@@ -14,6 +14,7 @@ before_script:
   - sudo -E ansible/bootstrap.sh
   - cat behat_params.sh
   - sleep 3  # Give web server a chance to start
+  - echo "127.0.0.1 localhost" | sudo tee -a /etc/hosts
   - curl http://localhost:8888
 
 script:
