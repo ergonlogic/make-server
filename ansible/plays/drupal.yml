@@ -9,7 +9,7 @@
     - makefile: dev.build.yml
   tasks:
     - name: Build platform
-      shell: "drush make -y {{ root }}{{ makefile }} {{ drupal_dir }}"
+      shell: "drush make -y {{ root }}/{{ makefile }} {{ drupal_dir }}"
       args:
         creates: "{{ drupal_dir }}"
     - name: Symlink project root into platform as a profile
