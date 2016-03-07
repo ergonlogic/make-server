@@ -10,15 +10,6 @@
     # N.B. 'root' is passed in bootstrap.sh, since it'll differ b/w Vagrant
     # and TravisCI.
   tasks:
-    - shell: whoami
-      register: result
-    - debug: var=result verbosity=2
-    - shell: pwd
-      register: result
-    - debug: var=result verbosity=2
-    - shell: ls -la
-      register: result
-    - debug: var=result verbosity=2
     - name: Build platform
       shell: "drush make -y {{ root }}/{{ makefile }} {{ drupal_dir }}"
       args:
