@@ -8,6 +8,15 @@
     - site_dir: "{{ drupal_dir }}/sites/{{ site_name }}"
     - makefile: dev.build.yml
   tasks:
+    - shell: whoami
+      register: result
+    - debug: var=result verbosity=2
+    - shell: pwd
+      register: result
+    - debug: var=result verbosity=2
+    - shell: ls -la
+      register: result
+    - debug: var=result verbosity=2
     - name: Build platform
       shell: "drush make -y {{ root }}/{{ makefile }} {{ drupal_dir }}"
       args:
