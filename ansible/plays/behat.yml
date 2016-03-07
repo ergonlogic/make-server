@@ -32,6 +32,7 @@
         dest: ~/.drush/drush-bde-env
       notify:
       - Clear Drush cache
+      - Restart Apache
     - meta: flush_handlers
     - name: Generate Behat parameters
       shell: "drush beg --subcontexts=profiles/{{ profile }}/modules --site-root={{ drupal_dir }} --skip-path-check --base-url={{ uri }} {{root}}/behat_params.sh"
