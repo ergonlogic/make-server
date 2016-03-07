@@ -10,6 +10,8 @@ env:
 #    - DRUSH_DEV=true  # TODO: Fix dev version of Drush install (or remove it entirely)
     - DRUSH_DEV=false
 
+before_script:
+  - sudo -E ansible/bootstrap.sh
+
 script:
-  - sudo -E ansible/bootstrap.sh &> /dev/null
   - make test-on-travis

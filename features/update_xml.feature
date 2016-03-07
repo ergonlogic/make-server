@@ -5,5 +5,5 @@ Feature: Update XML
 
   Scenario: Anonymous access to an XML page
     Given I am not logged in
-    When I visit "/"
-    Then I should see the text "Enter your Site-Install username."
+      And I am on the homepage
+     Then I should see the text "Enter your Site-Install username."
