@@ -18,8 +18,34 @@
       shell: "curl -s https://getcomposer.org/installer | php"
       args:
         chdir: "{{ root }}"
+        creates: "{{ root }}/composer.phar"
       when: vagrant == 'true'
-    - name: Install Behat
+    - name: Install Behat (Vagrant)
       shell: "./composer.phar install"
       args:
         chdir: "{{ root }}"
+        creates: "{{ root }}/bin/behat"
+      when: vagrant == 'true'
+    - name: Install Behat (TravisCI)
+      shell: "composer install"
+      args:
+        chdir: "{{ root }}"
+        creates: "{{ root }}/bin/behat"
+      when: vagrant == 'false'
+    - name: Install drush-bde-env
+      git:
+        repo: https://github.com/pfrenssen/drush-bde-env.git
+        dest: ~/.drush/drush-bde-env
+      notify:
+      - Clear Drush cache
+    - meta: flush_handlers
+    - name: Generate Behat parameters
+      shell: "drush beg --subcontexts=profiles/{{ profile }}/modules --site-root={{ drupal_dir }} {{root}}/behat_params.sh"
+      args:
+        chdir: "{{ drupal_dir }}"
+        creates: "{{ root }}/behat_params.sh"
+
+
+  handlers:
+    - name: Clear Drush cache
+      shell: drush cc drush

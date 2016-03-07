@@ -1,0 +1,10 @@
+---
+# N.B. 'root' and 'vagrant' are passed in bootstrap.sh, since it'll differ b/w
+# Vagrant and TravisCI.
+
+drupal_dir: /var/www/html/d8
+profile: make_server
+site_name: default
+site_dir: "{{ drupal_dir }}/sites/{{ site_name }}"
+makefile: dev.build.yml
+

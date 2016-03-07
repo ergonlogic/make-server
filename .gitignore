@@ -5,3 +5,4 @@ vendor/*
 bin/*
 selenium-server.jar
 composer.phar
+behat_params.sh

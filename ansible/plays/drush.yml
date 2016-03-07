@@ -10,6 +10,7 @@
         - htop
         - strace
         - tree
+        - git
         - subversion
         - unzip
         - bzr

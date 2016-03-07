@@ -1,13 +1,5 @@
 ---
 - hosts: localhost
-  vars:
-    - drupal_dir: /var/www/html/d8
-    - profile: make_server
-    - site_name: default
-    - site_dir: "{{ drupal_dir }}/sites/{{ site_name }}"
-    - makefile: dev.build.yml
-    # N.B. 'root' is passed in bootstrap.sh, since it'll differ b/w Vagrant
-    # and TravisCI.
   tasks:
     - name: Build platform
       shell: "drush make -y {{ root }}/{{ makefile }} {{ drupal_dir }}"
