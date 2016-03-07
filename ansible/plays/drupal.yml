@@ -20,7 +20,7 @@
         path: "{{ drupal_dir }}/profiles/{{ profile }}"
         src: "{{ root }}"
     - name: Install Drupal site
-      shell: "drush -y si {{ profile }} --db-url=mysql://root@localhost/{{ site_name }} --sites-subdir={{ site_name }}"
+      shell: "drush -y si {{ profile }} --db-url=mysql://root@localhost/site0"
       args:
         chdir: "{{ drupal_dir }}"
         creates: "{{ site_dir }}/settings.php"
