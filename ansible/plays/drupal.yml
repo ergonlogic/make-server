@@ -7,6 +7,8 @@
     - site_name: site0
     - site_dir: "{{ drupal_dir }}/sites/{{ site_name }}"
     - makefile: dev.build.yml
+    # N.B. 'root' is passed in bootstrap.sh, since it'll differ b/w Vagrant
+    # and TravisCI.
   tasks:
     - shell: whoami
       register: result
@@ -25,8 +27,6 @@
       file:
         state: link
         path: "{{ drupal_dir }}/profiles/{{ profile }}"
-        # N.B. 'root' is passed in bootstrap.sh, since it'll differ b/w Vagrant
-        # and TravisCI.
         src: "{{ root }}"
     - name: Install Drupal site
       shell: "drush -y si {{ profile }} --db-url=mysql://root@localhost/{{ site_name }} --sites-subdir={{ site_name }}"
