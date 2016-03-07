@@ -10,6 +10,7 @@ Vagrant.configure(2) do |config|
 
     d.vm.hostname = 'make.local'
     d.vm.network 'private_network', ip: '10.57.57.57'
+    config.vm.network "forwarded_port", guest: 8888, host: 8888
 
     d.vm.provision "shell",
       path: "ansible/bootstrap.sh",
