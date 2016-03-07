@@ -6,10 +6,10 @@ export ANSIBLE_FORCE_COLOR=true
 # Isolate differences between Vagrant and TravisCI environments.
 if [[ $2 == 'true' ]]; then
   ANSIBLE_DIR=/vagrant/ansible
-  ROOT=/vagrant
+  ROOT=/vagrant/
 else
   ANSIBLE_DIR=./ansible
-  ROOT=.
+  ROOT=
 fi
 
 # Default to packaged versions of Ansible and Drush, but allow installation
