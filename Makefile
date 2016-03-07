@@ -1,3 +1,5 @@
+SHELL := /bin/bash
+
 up:
 	@vagrant up
 rebuild:
