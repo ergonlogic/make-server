@@ -7,4 +7,4 @@ profile: make_server
 site_name: default
 site_dir: "{{ drupal_dir }}/sites/{{ site_name }}"
 makefile: dev.build.yml
-uri: http://localhost:8888/index.php
+uri: http://localhost:8888

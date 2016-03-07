@@ -12,7 +12,7 @@ Feature: Update XML
       And I visit "/user/register"
      Then I should see the text "A valid email address."
 
-
+  @wip
   Scenario: Anonymous access to an XML page
     Given I am not logged in
       And I visit "/release-history/hosting_civicrm/7.x"

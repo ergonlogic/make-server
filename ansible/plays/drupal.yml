@@ -40,10 +40,14 @@
         dest: /etc/apache2/ports.conf
         line: "Listen 8888"
       notify: Restart Apache
+    - name: Enable mod_rewrite
+      apache2_module:
+        name: rewrite
+      notify: Restart Apache
     - name: Add Apache vhost
-      copy:
-        content: "<VirtualHost *:8888>\n     DocumentRoot /var/www/html/d8\n</VirtualHost>"
+      template:
         dest: "/etc/apache2/sites-enabled/d8.conf"
+        src: ../files/vhost
       notify: Restart Apache
 
 
