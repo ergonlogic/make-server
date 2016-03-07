@@ -13,6 +13,7 @@ env:
 before_script:
   - sudo -E ansible/bootstrap.sh
   - cat behat_params.sh
+  - curl http://localhost/d8/index.php
 
 script:
   - make test-on-travis
