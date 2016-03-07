@@ -32,7 +32,7 @@
       - Clear Drush cache
     - meta: flush_handlers
     - name: Generate Behat parameters
-      shell: "drush beg --subcontexts=profiles/{{ profile }}/modules --site-root={{ drupal_dir }} --skip-path-check {{root}}/behat_params.sh"
+      shell: "drush beg --subcontexts=profiles/{{ profile }}/modules --site-root={{ drupal_dir }} --skip-path-check --base-url={{ uri }} {{root}}/behat_params.sh"
       args:
         chdir: "{{ drupal_dir }}"
         creates: "{{ root }}/behat_params.sh"

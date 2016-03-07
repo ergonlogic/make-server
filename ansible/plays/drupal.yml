@@ -24,3 +24,7 @@
       shell: "drush upwd admin --password=pwd"
       args:
         chdir: "{{ site_dir }}"
+    - name: Generate a site alias
+      copy:
+        dest: "~/.drush/local.alias.drushrc.php"
+        content: "<?php\n$aliases['local'] = array('root' => '{{ drupal_dir }}','uri' => '{{ uri }}');"

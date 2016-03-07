@@ -11,6 +11,5 @@ default:
     Behat\MinkExtension:
       goutte: ~
       selenium2: ~
-      base_url: http://seven.l
     Drupal\DrupalExtension:
       blackbox: ~
