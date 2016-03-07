@@ -11,4 +11,4 @@ env:
     - DRUSH_DEV=false
 
 script:
-  - sudo ansible/bootstrap.sh
+  - sudo -E ansible/bootstrap.sh
