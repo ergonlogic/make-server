@@ -17,12 +17,15 @@ before_script:
   - ping -c3 localhost  # Give web server a chance to start
   - apache2ctl -S
   - apache2ctl status
-  - curl http://localhost:8080/
+  - cd /var/www/html/d8
+  - drush runserver 8888
+  - curl http://localhost:8888/
   - curl http://localhost/
   - curl http://127.0.0.1:8080/
   - curl http://127.0.0.1/
   - cat /etc/apache2/ports.conf
   - cat /etc/apache2/sites-enabled/d8.conf
+ 
 
 script:
   - make test-on-travis
