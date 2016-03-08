@@ -19,7 +19,6 @@ else
   SCRIPT_USER=travis
   echo "Installing Ansible"
   if [[ $install_ansible == 1 ]]; then
-    pip install --upgrade pip
     pip install ansible
   fi
 fi

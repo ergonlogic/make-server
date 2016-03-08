@@ -5,6 +5,9 @@ dist: trusty
 
 sudo: false
 
+install:
+  - pip install --upgrade pip
+
 before_script:
   - ansible/bootstrap.sh
   # Debugging
