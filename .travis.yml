@@ -17,7 +17,8 @@ before_script:
   - ping -c3 localhost  # Give web server a chance to start
   - apache2ctl -S
   - apache2ctl status
-  - curl http://localhost:8888
+  - curl http://localhost:8888/
+  - curl http://127.0.0.1/
 
 script:
   - make test-on-travis
