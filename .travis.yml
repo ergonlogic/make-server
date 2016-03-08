@@ -23,8 +23,7 @@ before_script:
   - curl http://127.0.0.1/
   - cat /etc/apache2/ports.conf
   - cat /etc/apache2/sites-enabled/d8.conf
-  - sudo aptitude -y install lsof
-  - lsof -i :8888
+  - sudo netstat -peant | grep ":8000 "
 
 script:
   - make test-on-travis
