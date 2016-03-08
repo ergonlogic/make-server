@@ -1,4 +1,4 @@
-<VirtualHost *:8888>
+<VirtualHost *:{{ port }}>
     DocumentRoot {{ drupal_dir }}
     DirectoryIndex index.php
     <Directory {{ drupal_dir }}>

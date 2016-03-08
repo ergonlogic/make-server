@@ -38,7 +38,7 @@
     - name: Make Apache listen on custom port
       lineinfile:
         dest: /etc/apache2/ports.conf
-        line: "Listen 8888"
+        line: "Listen {{ port }}"
       notify: Restart Apache
     - name: Enable mod_rewrite
       apache2_module:
