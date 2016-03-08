@@ -1,5 +1,9 @@
 ---
 - hosts: localhost
+  vars_files:
+    - ../group_vars/all.yml
+  vars:
+    - composer: "{{ (vagrant) | ternary('/vagrant/composer.phar', 'composer') }}"
   tasks:
     - name: Install Behat dependencies
       apt:
@@ -8,20 +12,23 @@
       with_items:
         - php5-curl
         - openjdk-7-jre-headless
+      remote_user: root
+      become: true
+      when: vagrant
     - name: Download Selenium
       get_url:
         url: http://selenium-release.storage.googleapis.com/2.52/selenium-server-standalone-2.52.0.jar
         dest: "{{ root }}/selenium-server.jar"
         mode: 0555
-      when: vagrant == 'true'
-    # TODO: Composer is already installed on Travis. We could speed up test by using that one. Was failing...
+      when: vagrant
     - name: Install Composer
       shell: "curl -s https://getcomposer.org/installer | php"
       args:
         chdir: "{{ root }}"
         creates: "{{ root }}/composer.phar"
+      when: vagrant
     - name: Install Behat
-      shell: "{{ root }}/composer.phar install"
+      shell: "{{ composer }} install"
       args:
         chdir: "{{ root }}"
         creates: "{{ root }}/bin/behat"
@@ -32,13 +39,15 @@
       notify: Clear Drush cache
     - meta: flush_handlers
     - name: Generate Behat parameters
-      shell: "drush beg --subcontexts=profiles/{{ profile }}/modules --site-root={{ drupal_dir }} --skip-path-check --base-url={{ uri }} {{root}}/behat_params.sh"
+      shell: "{{ drush }} beg --subcontexts=profiles/{{ profile }}/modules --site-root={{ drupal_dir }} --skip-path-check --base-url={{ uri }} {{root}}/behat_params.sh"
       args:
         chdir: "{{ drupal_dir }}"
         creates: "{{ root }}/behat_params.sh"
+        executable: /bin/bash
 
 
   handlers:
     - name: Clear Drush cache
-      shell: drush cc drush
-
+      shell: "{{ drush }} cc drush"
+      args:
+        executable: /bin/bash

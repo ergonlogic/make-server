@@ -3,29 +3,14 @@ language: php
 
 dist: trusty
 
-sudo: true
-
-env:
-  matrix:
-#    - DRUSH_DEV=true  # TODO: Fix dev version of Drush install (or remove it entirely)
-    - DRUSH_DEV=false
+sudo: false
 
 before_script:
   - sudo -E ansible/bootstrap.sh
   # Debugging
   - cat behat_params.sh
   - ping -c3 localhost  # Give web server a chance to start
-  - apache2ctl -S
-  - apache2ctl status
-  - cd /var/www/html/d8
-  - drush runserver 8888 &
   - curl http://localhost:8888/
-  - curl http://localhost/
-  - curl http://127.0.0.1:8080/
-  - curl http://127.0.0.1/
-  - cat /etc/apache2/ports.conf
-  - cat /etc/apache2/sites-enabled/d8.conf
- 
 
 script:
   - make test-on-travis

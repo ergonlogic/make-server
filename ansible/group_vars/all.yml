@@ -1,11 +1,26 @@
 ---
 # N.B. 'root' and 'vagrant' are passed in bootstrap.sh, since it'll differ b/w
 # Vagrant and TravisCI.
-
-drupal_dir: /var/www/html/d8
+drupal_dir: ~/drupal
 profile: make_server
 site_name: default
 site_dir: "{{ drupal_dir }}/sites/{{ site_name }}"
 makefile: dev.build.yml
-port: 8080
+port: 8888
 uri: "http://localhost:{{ port }}"
+drush: ~/bin/drush
+vagrant: "{{ (ansible_user_id == 'vagrant') | ternary(true,false) }}"
+utilities:
+- screen
+- htop
+- strace
+- tree
+drush_deps:
+- git
+- php5
+- php5-mysql
+- php5-cli
+- php5-gd
+- mysql-server
+
+

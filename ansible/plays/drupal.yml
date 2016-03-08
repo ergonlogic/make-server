@@ -1,58 +1,35 @@
 ---
 - hosts: localhost
+  vars_files:
+    - ../group_vars/all.yml
   tasks:
-    - name: Install Apache
-      apt:
-        name: "{{ item }}"
-        state: installed
-      with_items:
-        - apache2
-        - libapache2-mod-php5
     - name: Build platform
-      shell: "drush make -y {{ root }}/{{ makefile }} {{ drupal_dir }}"
+      shell: "{{ drush }} make -y {{ root }}/{{ makefile }} {{ drupal_dir }}"
       args:
         creates: "{{ drupal_dir }}"
+        executable: /bin/bash
     - name: Symlink project root into platform as a profile
       file:
         state: link
         path: "{{ drupal_dir }}/profiles/{{ profile }}"
         src: "{{ root }}"
     - name: Install Drupal site
-      shell: "drush -y si {{ profile }} --db-url=mysql://root@localhost/site0"
+      shell: "{{ drush }} -y si {{ profile }} --db-url=mysql://root@localhost/site0 --account-pass=pwd"
       args:
         chdir: "{{ drupal_dir }}"
         creates: "{{ site_dir }}/settings.php"
-    - name: Make site files/ dir writeable by web user
-      file:
-        path: "{{ site_dir }}/files/"
-        owner: www-data
-        recurse: yes
-    - name: Set default password to `pwd`
-      shell: "drush upwd admin --password=pwd"
-      args:
-        chdir: "{{ site_dir }}"
+        executable: /bin/bash
     - name: Generate a site alias
       copy:
         dest: "~/.drush/local.alias.drushrc.php"
         content: "<?php\n$aliases['local'] = array('root' => '{{ drupal_dir }}','uri' => '{{ uri }}');"
-    - name: Make Apache listen on custom port
-      lineinfile:
-        dest: /etc/apache2/ports.conf
-        line: "Listen {{ port }}"
-      notify: Restart Apache
-    - name: Enable mod_rewrite
-      apache2_module:
-        name: rewrite
-      notify: Restart Apache
-    - name: Add Apache vhost
-      template:
-        dest: "/etc/apache2/sites-enabled/d8.conf"
-        src: ../files/vhost
-      notify: Restart Apache
-
-
-  handlers:
-    - name: Restart Apache
-      service:
-        name: apache2
-        state: restarted
+    - name: Check if PHP server is running
+      shell: ps aux|grep [p]hp
+      register: php
+      changed_when: False
+      failed_when: False
+    - name: Run PHP server
+      shell: "php -S 0.0.0.0:{{ port }} > ~/runserver.log &"
+      args:
+        chdir: "{{ drupal_dir }}"
+      when: php.rc == 1
