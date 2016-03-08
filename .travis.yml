@@ -18,7 +18,7 @@ before_script:
   - apache2ctl -S
   - apache2ctl status
   - cd /var/www/html/d8
-  - drush runserver 8888
+  - drush runserver 8888 &
   - curl http://localhost:8888/
   - curl http://localhost/
   - curl http://127.0.0.1:8080/
