@@ -7,7 +7,7 @@
       apt:
         name: "{{ item }}"
         state: installed
-      with_items: utilities
+      with_items: "{{ utilities }}"
       remote_user: root
       become: true
       when: vagrant
@@ -15,7 +15,7 @@
       apt:
         name: "{{ item }}"
         state: installed
-      with_items: drush_deps
+      with_items: "{{ drush_deps }}"
       remote_user: root
       become: true
       when: vagrant

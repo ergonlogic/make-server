@@ -4,14 +4,15 @@
     - ../group_vars/all.yml
   vars:
     - composer: "{{ (vagrant) | ternary('/vagrant/composer.phar', 'composer') }}"
+    - behat_deps:
+      - php5-curl
+      #- openjdk-7-jre-headless
   tasks:
     - name: Install Behat dependencies
       apt:
         name: "{{ item }}"
         state: installed
-      with_items:
-        - php5-curl
-        - openjdk-7-jre-headless
+      with_items: "{{ behat_deps }}"
       remote_user: root
       become: true
       when: vagrant
@@ -20,12 +21,12 @@
         url: http://selenium-release.storage.googleapis.com/2.52/selenium-server-standalone-2.52.0.jar
         dest: "{{ root }}/selenium-server.jar"
         mode: 0555
-      when: vagrant
+      when: False #vagrant
     - name: Install Composer
-      shell: "curl -s https://getcomposer.org/installer | php"
-      args:
-        chdir: "{{ root }}"
-        creates: "{{ root }}/composer.phar"
+      get_url:
+        url: https://getcomposer.org/download/1.0.0-beta1/composer.phar
+        dest: "{{ root }}/composer.phar"
+        mode: 0555
       when: vagrant
     - name: Install Behat
       shell: "{{ composer }} install"
