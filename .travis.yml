@@ -6,7 +6,7 @@ dist: trusty
 sudo: false
 
 before_script:
-  - sudo -E ansible/bootstrap.sh
+  - ansible/bootstrap.sh
   # Debugging
   - cat behat_params.sh
   - ping -c3 localhost  # Give web server a chance to start
