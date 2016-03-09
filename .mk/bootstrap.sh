@@ -4,6 +4,8 @@
 if [ -z ${TRAVIS_BUILD_DIR+x} ]; then
   cd /vagrant
   make deps
+else
+  export project_root=$TRAVIS_BUILD_DIR
 fi
 
 make init

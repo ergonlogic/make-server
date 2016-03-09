@@ -1,4 +1,5 @@
 SHELL := /bin/bash
+project_root ?= /vagrant
 
 up:
 	@vagrant up
