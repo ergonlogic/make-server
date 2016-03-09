@@ -28,7 +28,7 @@ endif
 	@echo "<?php" > ~/.drush/local.alias.drushrc.php
 	@echo "  \$$aliases['local'] = array('root' => '$(root)','uri' => '$(uri)');" >> ~/.drush/local.alias.drushrc.php
 	@echo "Starting PHP server."
-	@cd $(root) && php -S 0.0.0.0:$(port) > ~/runserver.log & &> /dev/null
+	@cd $(root) && php -S 0.0.0.0:$(port) &> ~/runserver.log &
 
 kill-server:
 	@echo "Stopping PHP server."
