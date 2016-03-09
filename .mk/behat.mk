@@ -17,7 +17,7 @@ deps-selenium: vagrant aptitude-update
 selenium: vm
 	@curl -sSL -z $(selenium) -o $(selenium) http://selenium-release.storage.googleapis.com/$(selenium-version)/selenium-server-standalone-$(selenium-release).jar
 
-drush-bde-env: vm $(drush) $(root)
+drush-bde-env: vm $(root)
 	@echo Generating project-specific Behat config
 ifneq '$(bde_exists)' '1'
 	@git clone https://github.com/pfrenssen/drush-bde-env.git $(bde_dir)
