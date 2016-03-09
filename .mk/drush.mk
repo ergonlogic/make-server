@@ -1,5 +1,4 @@
-drush        = $(bin_dir)/drush
-drush_dir    = $(src_dir)/drush-source
+drush_src    = $(src_dir)/drush-source
 release      = stable
 
 help-drush:

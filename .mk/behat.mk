@@ -1,6 +1,8 @@
 selenium         = $(bin_dir)/selenium-server.jar
 selenium_version = 2.52
 selenium_release = $(selenium-version).0
+bde_dir          = $(drush_dir)/drush-bde-env
+bde_exists       = $(shell if [[ -d $(bde_dir) ]]; then echo 1; fi)
 
 help-behat:
 	@echo "make behat"
@@ -15,10 +17,13 @@ deps-selenium: vagrant aptitude-update
 selenium: vm
 	@curl -sSL -z $(selenium) -o $(selenium) http://selenium-release.storage.googleapis.com/$(selenium-version)/selenium-server-standalone-$(selenium-release).jar
 
-drush-bde-env: vm $(bin_dir)/drush $(root)
-	@git clone https://github.com/pfrenssen/drush-bde-env.git ~/.drush/drush-bde-env
+drush-bde-env: vm $(drush) $(root)
+	@echo Generating project-specific Behat config
+ifneq '$(bde_exists)' '1'
+	@git clone https://github.com/pfrenssen/drush-bde-env.git $(bde_dir)
 	@$(drush) cc drush
-	@cd $(project_root) && $(drush) beg --subcontexts=profiles/$(profile)/modules --site-root=$(root) --skip-path-check --base-url=$(uri) $(project_root)/behat_params.sh
+endif
+	@cd $(root) && $(drush) beg --subcontexts=profiles/$(profile)/modules --site-root=$(root) --skip-path-check --base-url=$(uri) $(project_root)/behat_params.sh
 
 deps-behat: vagrant aptitude-update composer
 	@echo Installing Behat dependencies
@@ -26,7 +31,7 @@ deps-behat: vagrant aptitude-update composer
 
 behat: vm drush-bde-env
 ifeq '$(project_root)' '/vagrant'
-	cd $(project_root) && $(composer) install
+	@cd $(project_root) && $(composer) install
 else
-	cd $(project_root) && composer install
+	@cd $(project_root) && composer install
 endif

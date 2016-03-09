@@ -1,6 +1,3 @@
-bin_dir      = ~/.bin
-src_dir      = ~/.src
-drush_dir    = ~/.drush
 user         = $(shell whoami)
 bashrc       = export PATH="$$PATH:$$HOME/.bin"
 help_hooks   = $(shell grep "^help-[^:]*" .mk -rho)
@@ -12,7 +9,17 @@ init: vm
 	@mkdir -p $(drush_dir)
 	@grep -q -F '$(bashrc)' ~/.bashrc || echo '$(bashrc)' >> ~/.bashrc
 
-deps: mysql-server $(deps_hooks) utilities
+deps: aptitude-update mysql-server $(deps_hooks) utilities
+
+list-deps:
+	@echo The following dependency hooks are defined:
+	@echo $(deps_hooks)
+
+help: $(help_hooks)
+
+list-help:
+	@echo The following help hooks are defined:
+	@echo $(help_hooks)
 
 aptitude-update: vagrant
 	@echo Updating apt
@@ -20,8 +27,6 @@ aptitude-update: vagrant
 
 fix-time:
 	@sudo ntpdate -s time.nist.gov
-
-help: $(help_hooks)
 
 utilities: vagrant aptitude-update
 	@echo Installing some utilities

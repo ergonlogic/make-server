@@ -1,5 +1,9 @@
-SHELL := /bin/bash
+SHELL        := /bin/bash
 project_root ?= /vagrant
+bin_dir       = ~/.bin
+src_dir       = ~/.src
+drush_dir     = ~/.drush
+drush         = $(bin_dir)/drush
 
 up:
 	@vagrant up
