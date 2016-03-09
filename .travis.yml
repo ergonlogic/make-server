@@ -6,7 +6,7 @@ dist: trusty
 sudo: false
 
 install:
-  - ansible/bootstrap.sh
+  - .mk/bootstrap.sh
 
 before_script:
   - . ~/.bashrc
