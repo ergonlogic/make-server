@@ -11,8 +11,6 @@ install:
 before_script:
   - . ~/.bashrc
   # Debugging
-  - cat behat_params.sh
-  - ping -c3 localhost  # Give web server a chance to start
   - curl http://localhost:8888/
 
 script:
