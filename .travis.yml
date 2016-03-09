@@ -3,10 +3,13 @@ language: php
 
 dist: trusty
 
-sudo: true
+sudo: false
+
+install:
+  - ansible/bootstrap.sh
 
 before_script:
-  - ansible/bootstrap.sh
+  - . ~/.bashrc
   # Debugging
   - cat behat_params.sh
   - ping -c3 localhost  # Give web server a chance to start

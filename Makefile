@@ -13,3 +13,5 @@ wip:
 test-on-travis:
 	source behat_params.sh && bin/behat
 
+include .mk/*.mk
+

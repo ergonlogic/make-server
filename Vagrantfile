@@ -12,10 +12,13 @@ Vagrant.configure(2) do |config|
     d.vm.network 'private_network', ip: '10.57.57.57'
     config.vm.network "forwarded_port", guest: 8888, host: 8888
 
+    if Vagrant.has_plugin?("vagrant-cachier")
+      config.cache.scope = :box
+    end
+
     d.vm.provision "shell",
-      path: "ansible/bootstrap.sh",
+      path: ".mk/bootstrap.sh",
       privileged: false,
-      args: [ "true" ],
       keep_color: true
   end
 end
