@@ -1,4 +1,3 @@
-project_root = $(shell if [ -z ${TRAVIS_BUILD_DIR+x} ]; then echo "/vagrant"; else echo "$(TRAVIS_BUILD_DIR)"; fi)
 bin_dir      = ~/.bin
 src_dir      = ~/.src
 drush_dir    = ~/.drush

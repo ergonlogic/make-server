@@ -1,4 +1,4 @@
-project_root = $(shell if [ -z ${TRAVIS_BUILD_DIR+x} ]; then echo "/vagrant"; else echo "$(TRAVIS_BUILD_DIR)"; fi)
+project_root = $(shell if [ -z ${TRAVIS_BUILD_DIR+x} ]; then echo "/vagrant"; else echo $TRAVIS_BUILD_DIR; fi)
 makefile     = dev.build.yml
 root         = ~/drupal
 exists       = $(shell if [[ -d $(root) ]]; then echo 1; fi)
